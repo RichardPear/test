@@ -10,15 +10,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/toutiao': {
+      '/vue/api/toutiao': {
         target: `http://v.juhe.cn/toutiao`,
         changeOrigin: true,
-        pathRewrite: { '^/api/toutiao': '' },
+        pathRewrite: { '^/vue/api/toutiao': '' },
       },
-      '/api/mtoutiao': {
+      '/vue/api/mtoutiao': {
         target: `https://m.toutiao.com`,
         changeOrigin: true,
-        pathRewrite: { '^/api/mtoutiao': '' },
+        pathRewrite: { '^/vue/api/mtoutiao': '' },
       },
     },
 
@@ -52,7 +52,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/vue/',
 
     /**
      * Source Maps
