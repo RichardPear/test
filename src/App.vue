@@ -20,11 +20,14 @@
         </mt-tab-item>
       </mt-tabbar>
     </transition>
-    <keep-alive>
-      <transition name="fade" mode="out-in">
-        <router-view/>
-      </transition>
-    </keep-alive>
+    <transition name="fade" mode="out-in">
+      <keep-alive key="keepalive">
+        <router-view v-if="$route.meta.keepAlive"/>
+      </keep-alive>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <router-view key="noKeepalive" v-if="!$route.meta.keepAlive"/>
+    </transition>
   </div>
 </template>
 

@@ -4,15 +4,27 @@ import axios from './axios';
 Vue.use(Vuex);
 const state = {
   isShowTabbar: true,
-  news: [],
+  news: {
+    data: [],
+    return_count: 0,
+  },
   newsDetail: {},
 };
-const getters = {};
+const getters = {
+  news: state => state.news.data,
+  returnCount: state => state.news.return_count,
+  maxBehotTime: state => {
+    let news = state.news.data;
+    if (news && news.length) {
+      return news[news.length - 1].behot_time;
+    }
+    return 0;
+  },
+};
 const actions = {
   async getNews({ commit }) {
-    // let { data } = await axios.get('/api/toutiao/index?type=&key=3de30b5262b766f921cb51db84f2f878');
-    let { data } = await axios.get('/api/mtoutiao/list/?tag=news_hot&ac=wap&count=20&format=json_raw&as=A155DC9BC428419');
-    commit('setNews', data.data);
+    let { data } = await axios.get('/api/mtoutiao/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A155DC9BC428419&max_behot_time=0&i=');
+    commit('setNews', data);
   },
   async getNewsDetail({ commit }, source) {
     let { data } = await axios.get(`/api/mtoutiao/${source}/info/?_signature=9w8v6hAQq8ZdIG9qor7v9.cPL.&i=${source.slice(1)}`);
@@ -25,6 +37,10 @@ const actions = {
   showTabbar({ commit }) {
     commit('setShowTabbar', true);
   },
+  async getMoreNews({ commit }, { maxBehotTime = 0 }) {
+    let { data } = await axios.get(`/api/mtoutiao/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A155DC9BC428419&max_behot_time=${maxBehotTime}&i=${maxBehotTime}`);
+    commit('appendNews', data.data);
+  },
 };
 const mutations = {
   setNews(state, news) {
@@ -36,6 +52,9 @@ const mutations = {
   setShowTabbar(state, flag) {
     state.isShowTabbar = flag;
   },
+  appendNews(state, news) {
+    state.news.data.push(...news);
+  }
 };
 export default new Vuex.Store({
   state,
