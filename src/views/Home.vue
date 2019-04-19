@@ -12,7 +12,7 @@
           :date-time="item.datetime"
           :image-list="item.image_list"
           :comment-count="item.comment_count"
-          :source="item.source_url"
+          :source="item.item_id"
         ></news-item>
       </div>
     </div>

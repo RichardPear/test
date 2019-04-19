@@ -49,10 +49,10 @@ const router = new Router({
         keepAlive: false,
       },
     },
-    {
-      path: '*',
-      redirect: '/404',
-    },
+    // {
+    //   path: '*',
+    //   redirect: '/404',
+    // },
   ],
 });
 router.beforeEach((to, from, next) => {

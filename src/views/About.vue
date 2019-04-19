@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>About</h1>
+    <h1>努力开发中...</h1>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-div {
-  background: purple;
+h1 {
+  text-align: center;
 }
 </style>

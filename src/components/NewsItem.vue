@@ -1,6 +1,6 @@
 <template>
   <section>
-    <router-link :to="'/detail' + source" class="article-link">
+    <router-link :to="'/detail/i' + source" class="article-link">
       <div class="item-detai">
         <h3>{{title}}</h3>
         <div class="list-image">

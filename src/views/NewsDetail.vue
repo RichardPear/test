@@ -8,7 +8,7 @@
 
     <div class="page-body">
       <div class="artical-header">
-        <h2 class="article-tittle">{{newsDetail.title}}</h2>
+        <h2 class="article-title">{{newsDetail.title}}</h2>
         <div class="article-author">
           <span class="avatar">
             <img :src="newsDetail.media_user && newsDetail.media_user.avatar_url" alt>
@@ -16,7 +16,7 @@
           <span class="author-name">{{newsDetail.media_user && newsDetail.media_user.screen_name}}</span>
           <span class="artical-info">
             <span class="publish-time">{{pushliTime}}</span>
-            <span class="dot"></span>
+            <span class="dot" v-if="newsDetail.comment_count"></span>
             <span
               class="commment-count"
               v-if="newsDetail.comment_count"
@@ -76,16 +76,76 @@ export default {
   .page-body {
     margin-top: 50px;
   }
+  .article-title {
+    font-family: "PingFangSC-Medium";
+    line-height: 1.36;
+    font-weight: 500;
+    color: #222222;
+    font-size: 22px;
+  }
   .article-author {
     margin: 10px 0;
-  }
-  .avatar {
-    width: 24px;
+    position: relative;
     height: 24px;
-    display: inline-block;
+    line-height: 24px;
+    .avatar {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+    .author-name {
+      position: absolute;
+      left: 30px;
+      color: #222;
+      font-size: 14px;
+    }
+    .artical-info {
+      position: absolute;
+      right: 0;
+      color: #999;
+      font-size: 12px;
+    }
+    .dot {
+      display: inline-block;
+      width: 2px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #999;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+  }
+
+  .news-content /deep/ {
     img {
       width: 100%;
-      border-radius: 50%;
+      margin: 15px 0 0;
+    }
+    h1 {
+      font-size: 18px;
+      border-left-width: 3px;
+      border-left: solid #ed4040;
+      padding-left: 6px;
+      line-height: 28px;
+      margin: 24px 0;
+    }
+    .img-wrapper-embedded,
+    p {
+      margin-top: 15px;
+    }
+    p {
+      word-wrap: break-word;
+      color: #222;
+      text-align: justify;
     }
   }
 }
