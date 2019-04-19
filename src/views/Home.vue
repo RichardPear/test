@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <div
-      v-infinite-scroll="bottomLoadMore"
-      infinite-scroll-disabled="disableBottomLoading"
-      :infinite-scroll-distance="10"
+  <div class="home">
+    <mt-loadmore
+      :top-method="loadTop"
+      :bottom-method="loadBottom"
+      :bottom-all-loaded="allLoaded"
+      :autoFill="false"
+      ref="loadmore"
     >
       <div v-for="(item, index) in news" :key="index">
         <news-item
@@ -15,7 +17,7 @@
           :source="item.item_id"
         ></news-item>
       </div>
-    </div>
+    </mt-loadmore>
   </div>
 </template>
 
@@ -27,38 +29,32 @@ export default {
   async created() {
     await this.getNews();
     this.$Toast({
-      message: `为您更新了${this.returnCount}条数据`
-    });
-  },
-  beforeRouteLeave(to, from, next) {
-    // 导航离开该组件的对应路由时调用
-    // 可以访问组件实例 `this`
-    this.disableBottomLoading = true;
-    next();
-  },
-  beforeRouteEnter(to, from, next) {
-    // 在渲染该组件的对应路由被 confirm 前调用
-    // 不！能！获取组件实例 `this`
-    // 因为当守卫执行前，组件实例还没被创建
-    next(vm => {
-      vm.disableBottomLoading = false;
+      message: `为您更新了${this.returnCount}条数据`,
+      duration: 800
     });
   },
   data() {
     return {
-      disableBottomLoading: false
+      allLoaded: false
     };
   },
   methods: {
     ...mapActions(["getNews", "getMoreNews"]),
-    async bottomLoadMore() {
-      this.disableBottomLoading = true;
+    async loadTop() {
+      await this.getNews();
+      this.$refs.loadmore.onTopLoaded();
+      this.$Toast({
+        message: "刷新成功",
+        duration: 800
+      });
+    },
+    async loadBottom() {
       await this.getMoreNews({ maxBehotTime: this.maxBehotTime });
-      this.disableBottomLoading = false;
+      this.$refs.loadmore.onBottomLoaded();
     }
   },
   computed: {
-    ...mapGetters(["news", "returnCount", "maxBehotTime"])
+    ...mapGetters(["news", "returnCount", "maxBehotTime", "hasMore"])
   }
 };
 </script>

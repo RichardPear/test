@@ -7,6 +7,7 @@ const state = {
   news: {
     data: [],
     return_count: 0,
+    has_more: false,
   },
   newsDetail: {},
 };
@@ -20,6 +21,7 @@ const getters = {
     }
     return 0;
   },
+  hasMore: staet => state.news.has_more
 };
 const actions = {
   async getNews({ commit }) {
@@ -28,7 +30,6 @@ const actions = {
   },
   async getNewsDetail({ commit }, source) {
     let { data } = await axios.get(`/api/mtoutiao/${source}/info/?_signature=9w8v6hAQq8ZdIG9qor7v9.cPL.&i=${source.slice(1)}`);
-    console.log(data.data);
     commit('setNewsDetail', data.data);
   },
   hideTabbar({ commit }) {

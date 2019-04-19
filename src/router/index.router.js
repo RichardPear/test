@@ -62,6 +62,6 @@ router.beforeEach((to, from, next) => {
   } else {
     store.dispatch('showTabbar');
   }
-  console.log(to);
+  console.log(`global router.beforeEach`, to);
 });
 export default router;
