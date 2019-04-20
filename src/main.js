@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router/index.router';
 import store from './store/index.store';
-import Mint, { Toast } from 'mint-ui';
+import Mint, { Toast, Indicator } from 'mint-ui';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -14,6 +14,7 @@ Vue.prototype.$http = axios;
 moment.locale('zh-cn');
 Vue.prototype.$moment = moment;
 Vue.prototype.$Toast = Toast;
+Vue.prototype.$Indicator = Indicator;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

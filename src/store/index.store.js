@@ -41,7 +41,7 @@ const actions = {
   async getMoreNews({ commit }, { maxBehotTime = 0 }) {
     let { data } = await axios.get(`/api/mtoutiao/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A155DC9BC428419&max_behot_time=${maxBehotTime}&i=${maxBehotTime}`);
     commit('appendNews', data.data);
-  },
+  }
 };
 const mutations = {
   setNews(state, news) {
@@ -55,6 +55,9 @@ const mutations = {
   },
   appendNews(state, news) {
     state.news.data.push(...news);
+  },
+  clearNewsDetail(state) {
+    state.newsDetail = {};
   }
 };
 export default new Vuex.Store({

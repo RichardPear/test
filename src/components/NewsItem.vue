@@ -58,7 +58,7 @@ export default {
 section {
   border-bottom: 1px solid rgba(221, 221, 221, 0.6);
   & .article-link:visited h3 {
-    color: #333;
+    color: gray;
   }
   h3 {
     color: #222;

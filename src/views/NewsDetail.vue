@@ -1,9 +1,9 @@
 <template>
   <div class="page">
     <mt-header :title="newsDetail.title" fixed>
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
+      <div slot="left">
+        <mt-button icon="back" @click="$router.go(-1)">返回</mt-button>
+      </div>
     </mt-header>
 
     <div class="page-body">
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   created() {
     this.loadNewsDetail();
@@ -43,12 +43,25 @@ export default {
   },
   methods: {
     ...mapActions(["getNewsDetail"]),
-    loadNewsDetail() {
+    ...mapMutations(["clearNewsDetail"]),
+    async loadNewsDetail() {
+      this.clearNewsDetail();
       let sourceUrl = this.$route.params.id;
       if (!sourceUrl) {
         return;
       }
-      this.getNewsDetail(sourceUrl);
+      this.$Indicator.open({
+        text: "正在加载"
+      });
+      try {
+        await this.getNewsDetail(sourceUrl);
+      } catch (e) {
+        console.log(e)
+        this.$Toast({
+          message: "网络出错，请重试"
+        });
+      }
+      this.$Indicator.close();
     }
   },
   computed: {
