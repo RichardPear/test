@@ -3,16 +3,17 @@ import Router from 'vue-router';
 import Home from '@/views/Home';
 import About from '@/views/About';
 import NewsDetail from '@/views/NewsDetail';
+import Profile from '@/views/Profile';
 import NotFound from '@/views/NotFound';
 import store from '../store/index.store';
 
 Vue.use(Router);
 const router = new Router({
   scrollBehavior(to, from, savedPosition) {
-    if(savedPosition) {
+    if (savedPosition) {
       return savedPosition;
     }
-    return {x: 0, y: 0};
+    return { x: 0, y: 0 };
   },
   routes: [
     {
@@ -28,6 +29,7 @@ const router = new Router({
       name: 'about',
       component: About,
       meta: {
+        showTabar: false,
         keepAlive: true,
       },
     },
@@ -35,6 +37,15 @@ const router = new Router({
       path: '/detail/:id',
       name: 'detail',
       component: NewsDetail,
+      meta: {
+        showTabar: false,
+        keepAlive: false,
+      },
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
         showTabar: false,
         keepAlive: false,

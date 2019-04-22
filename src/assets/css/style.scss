@@ -10,9 +10,6 @@ html, body, #app{
     -webkit-text-size-adjust: none;
     word-break: break-word;
 }
-#app {
-  padding-bottom: 50px;
-}
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -20,4 +17,7 @@ html, body, #app{
   content: " ";
   clear: both;
   height: 0;
+}
+.swiper-container {
+  height: 100vh;
 }

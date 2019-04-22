@@ -7,7 +7,9 @@ import store from './store/index.store';
 import Mint, { Toast, Indicator } from 'mint-ui';
 import axios from 'axios';
 import moment from 'moment';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 
+Vue.use(VueAwesomeSwiper);
 Vue.config.productionTip = false;
 Vue.use(Mint);
 Vue.prototype.$http = axios;
@@ -25,3 +27,5 @@ new Vue({
 });
 import './assets/css/style.scss';
 import './assets/css/transition.scss';
+import 'swiper/dist/css/swiper.css';
+import 'animate.css'

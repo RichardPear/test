@@ -14,7 +14,7 @@
           <img slot="icon" src="./assets/images/草莓.png">
           发现
         </mt-tab-item>
-        <mt-tab-item id="/b" :class="{'is-selected': selectedTab == '/b'}" disabled>
+        <mt-tab-item id="/profile" :class="{'is-selected': selectedTab == '/profile'}" disabled>
           <img slot="icon" src="./assets/images/蛋糕.png">
           我的
         </mt-tab-item>
